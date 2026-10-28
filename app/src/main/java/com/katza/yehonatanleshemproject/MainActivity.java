@@ -1,24 +1,66 @@
+
 package com.katza.yehonatanleshemproject;
 
 import android.os.Bundle;
+import android.view.View;
+import android.widget.Button;
+import android.widget.SeekBar;
+import android.widget.ImageView;
 
-import androidx.activity.EdgeToEdge;
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.core.graphics.Insets;
-import androidx.core.view.ViewCompat;
-import androidx.core.view.WindowInsetsCompat;
+import androidx.appcompat.widget.SwitchCompat;
 
 public class MainActivity extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        EdgeToEdge.enable(this);
         setContentView(R.layout.activity_main);
-        ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.main), (v, insets) -> {
-            Insets systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars());
-            v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom);
-            return insets;
+
+        SwitchCompat mySwitch = findViewById(R.id.mySwitch);
+
+        Button button1 = findViewById(R.id.button1);
+        Button button2 = findViewById(R.id.button2);
+
+        SeekBar seekBar = findViewById(R.id.seekBar);
+        ImageView myImage = findViewById(R.id.myImage);
+        button1.setVisibility(View.GONE);
+        button2.setVisibility(View.GONE);
+
+        myImage.setAlpha(0f);
+        seekBar.setProgress(0);
+        mySwitch.setOnCheckedChangeListener((buttonView, isChecked) -> {
+
+            if (isChecked) {
+                button1.setVisibility(View.VISIBLE);
+                button2.setVisibility(View.VISIBLE);
+            } else {
+                button1.setVisibility(View.GONE);
+                button2.setVisibility(View.GONE);
+            }
+
         });
+        seekBar.setOnSeekBarChangeListener(
+                new SeekBar.OnSeekBarChangeListener() {
+
+                    @Override
+                    public void onProgressChanged(
+                            SeekBar seekBar,
+                            int progress,
+                            boolean fromUser) {
+
+                        float alpha = progress / 100f;
+                        myImage.setAlpha(alpha);
+                    }
+
+                    @Override
+                    public void onStartTrackingTouch(SeekBar seekBar) {
+                    }
+
+                    @Override
+                    public void onStopTrackingTouch(SeekBar seekBar) {
+                    }
+                }
+        );
     }
 }
