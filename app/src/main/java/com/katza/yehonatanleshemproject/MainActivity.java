@@ -6,6 +6,7 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.SeekBar;
 import android.widget.ImageView;
+import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.SwitchCompat;
@@ -21,7 +22,15 @@ public class MainActivity extends AppCompatActivity {
 
         Button button1 = findViewById(R.id.button1);
         Button button2 = findViewById(R.id.button2);
+        button1.setOnClickListener(v -> {
+            Toast.makeText(this, "Button 1",
+                    Toast.LENGTH_SHORT).show();
+        });
 
+        button2.setOnClickListener(v -> {
+            Toast.makeText(this, "Button 2",
+                    Toast.LENGTH_SHORT).show();
+        });
         SeekBar seekBar = findViewById(R.id.seekBar);
         ImageView myImage = findViewById(R.id.myImage);
         button1.setVisibility(View.GONE);
