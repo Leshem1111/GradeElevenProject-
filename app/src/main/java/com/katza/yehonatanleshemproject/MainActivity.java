@@ -4,72 +4,123 @@ package com.katza.yehonatanleshemproject;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
-import android.widget.SeekBar;
-import android.widget.ImageView;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.appcompat.widget.SwitchCompat;
+
+import java.util.Random;
 
 public class MainActivity extends AppCompatActivity {
+    int number;
+    int SelectedNumber = 1;
+    int attempts = 0;
+    String history = "";
+
+    TextView numberText;
+    TextView resultText;
+    TextView attemptsText;
+    TextView historyText;
+    Button plus;
+    Button minus;
+    Button check;
+    Button restart;
+
+    Random random = new Random();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        SwitchCompat mySwitch = findViewById(R.id.mySwitch);
+        numberText = findViewById(R.id.numberText);
+        resultText = findViewById(R.id.resultText);
+        attemptsText = findViewById(R.id.attemptsText);
+        historyText = findViewById(R.id.historyText);
 
-        Button button1 = findViewById(R.id.button1);
-        Button button2 = findViewById(R.id.button2);
-        button1.setOnClickListener(v -> {
-            Toast.makeText(this, "Button 1",
-                    Toast.LENGTH_SHORT).show();
-        });
+        plus = findViewById(R.id.plusButton);
+        minus = findViewById(R.id.minusButton);
+        check = findViewById(R.id.checkButton);
+        restart = findViewById(R.id.playAgainButton);
 
-        button2.setOnClickListener(v -> {
-            Toast.makeText(this, "Button 2",
-                    Toast.LENGTH_SHORT).show();
-        });
-        SeekBar seekBar = findViewById(R.id.seekBar);
-        ImageView myImage = findViewById(R.id.myImage);
-        button1.setVisibility(View.GONE);
-        button2.setVisibility(View.GONE);
+        startNewGame();
 
-        myImage.setAlpha(0f);
-        seekBar.setProgress(0);
-        mySwitch.setOnCheckedChangeListener((buttonView, isChecked) -> {
-
-            if (isChecked) {
-                button1.setVisibility(View.VISIBLE);
-                button2.setVisibility(View.VISIBLE);
-            } else {
-                button1.setVisibility(View.GONE);
-                button2.setVisibility(View.GONE);
-            }
-
-        });
-        seekBar.setOnSeekBarChangeListener(
-                new SeekBar.OnSeekBarChangeListener() {
-
-                    @Override
-                    public void onProgressChanged(
-                            SeekBar seekBar,
-                            int progress,
-                            boolean fromUser) {
-
-                        float alpha = progress / 100f;
-                        myImage.setAlpha(alpha);
-                    }
-
-                    @Override
-                    public void onStartTrackingTouch(SeekBar seekBar) {
-                    }
-
-                    @Override
-                    public void onStopTrackingTouch(SeekBar seekBar) {
-                    }
+        plus.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if (SelectedNumber < 100) {
+                    SelectedNumber++;
+                    updateNumber();
                 }
-        );
+            }
+        });
+
+        minus.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if (SelectedNumber > 1) {
+                    SelectedNumber--;
+                    updateNumber();
+                }
+            }
+        });
+
+        check.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                checkGuess();
+            }
+        });
+
+        restart.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startNewGame();
+            }
+        });
+    }
+
+    private void updateNumber() {
+        numberText.setText(String.valueOf(SelectedNumber));
+    }
+
+    private void startNewGame() {
+
+        number = random.nextInt(100) + 1;
+
+        SelectedNumber = 1;
+        attempts = 0;
+        history = "";
+
+        updateNumber();
+
+        attemptsText.setText("0 ניסיונות");
+        resultText.setText("זמן לנחש");
+        historyText.setText("ניחושים קודמים");
+
+    }
+
+    private void checkGuess() {
+
+        attempts++;
+
+        attemptsText.setText("ניסיונות" + attempts);
+
+        history = history + SelectedNumber + " ";
+        historyText.setText("ניחושים קודמים" + history);
+
+        if (SelectedNumber > number) {
+
+            resultText.setText("גדול מדי");
+
+        } else if (SelectedNumber < number) {
+
+            resultText.setText("קטן מדי");
+
+        } else {
+
+            resultText.setText("מצאת את המספר בכמות ניסיונות" + attempts);
+
+        }
     }
 }

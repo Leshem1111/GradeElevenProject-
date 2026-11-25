@@ -6,50 +6,105 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    android:gravity="center_horizontal"
+    android:gravity="center"
     android:padding="24dp"
+    android:background="#F2F5FF"
     tools:context=".MainActivity">
 
-    <androidx.appcompat.widget.SwitchCompat
-        android:id="@+id/mySwitch"
+    <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Show Buttons"
-        android:checked="false"
-        android:layout_marginTop="40dp" />
+        android:layout_marginBottom="25dp"
+        android:text="משחק כיתה"
+        android:textColor="#263A70"
+        android:textSize="28sp"
+        android:textStyle="normal" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="תבחר מספר מאחד עד מאה"
+        android:textSize="16sp"
+        android:textColor="#333333"
+        android:layout_marginBottom="30dp"/>
+
+    <!-- Number selection -->
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:orientation="horizontal">
+
+        <Button
+            android:id="@+id/minusButton"
+            android:layout_width="70dp"
+            android:layout_height="70dp"
+            android:text="-"
+            android:textSize="30sp" />
+
+        <TextView
+            android:id="@+id/numberText"
+            android:layout_width="100dp"
+            android:layout_height="70dp"
+            android:gravity="center"
+            android:text="1"
+            android:textColor="#263A70"
+            android:textSize="36sp"
+            android:textStyle="bold" />
+
+        <Button
+            android:id="@+id/plusButton"
+            android:layout_width="70dp"
+            android:layout_height="70dp"
+            android:text="+"
+            android:textSize="30sp" />
+
+    </LinearLayout>
 
     <Button
-        android:id="@+id/button1"
+        android:id="@+id/checkButton"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="16dp"
-        android:text="Button 1"
-        android:visibility="gone" />
+        android:text="בדיקה"
+        android:layout_marginTop="25dp"/>
+
+    <TextView
+        android:id="@+id/resultText"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="תנחש"
+        android:textSize="20sp"
+        android:textStyle="bold"
+        android:textColor="#263A70"
+        android:gravity="center"
+        android:layout_marginTop="25dp"/>
+
+    <TextView
+        android:id="@+id/attemptsText"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="ניסונות: 0"
+        android:textSize="18sp"
+        android:textStyle="bold"
+        android:layout_marginTop="20dp"
+        android:textColor="#333333"/>
+
+    <TextView
+        android:id="@+id/historyText"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="ניחושים קודמים"
+        android:textSize="16sp"
+        android:textColor="#333333"
+        android:gravity="center"
+        android:layout_marginTop="20dp"/>
 
     <Button
-        android:id="@+id/button2"
+        android:id="@+id/playAgainButton"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="8dp"
-        android:text="Button 2"
-        android:visibility="gone" />
-
-    <SeekBar
-        android:id="@+id/seekBar"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="32dp"
-        android:max="100"
-        android:progress="0" />
-
-    <ImageView
-        android:id="@+id/myImage"
-        android:layout_width="match_parent"
-        android:layout_height="220dp"
-        android:layout_marginTop="24dp"
-        android:src="@drawable/israel"
-        android:scaleType="fitCenter"
-        android:contentDescription="Israel"
-        android:alpha="0" />
+        android:text="תאתחל את המשחק"
+        android:layout_marginTop="20dp"/>
 
 </LinearLayout>
